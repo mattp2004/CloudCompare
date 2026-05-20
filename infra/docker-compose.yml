@@ -1,0 +1,52 @@
+services:
+  db:
+    image: postgres:16
+    container_name: cloudcompare-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - cloudcompare_pgdata:/var/lib/postgresql/data
+    networks:
+      - cloudcompare
+
+  backend:
+    image: eclipse-temurin:17-jre
+    container_name: cloudcompare-backend
+    working_dir: /app
+    volumes:
+      - ./build/app.jar:/app/app.jar:ro
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      SERVER_PORT: 8080
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    command: ["java", "-jar", "/app/app.jar"]
+    depends_on:
+      - db
+    networks:
+      - cloudcompare
+
+  nginx:
+    image: nginx:alpine
+    container_name: cloudcompare-nginx
+    ports:
+      - "${NGINX_PORT}:80"
+      - "443:443"
+    volumes:
+      - ./frontend/dist:/usr/share/nginx/html:ro
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - backend
+    networks:
+      - cloudcompare
+
+volumes:
+  cloudcompare_pgdata:
+
+networks:
+  cloudcompare:

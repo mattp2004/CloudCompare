@@ -1,0 +1,63 @@
+.navbar-custom {
+    background: linear-gradient(0deg, #5098e9 0%, #6cadf8 100%) !important;
+    box-shadow: 0 4px 12px rgba(18, 29, 42, 0.3);
+    border-bottom: 2px solid rgba(22, 66, 118, 0.2);
+}
+
+.navbar-custom .navbar-brand {
+    color: white !important;
+    font-weight: 600;
+    font-size: 1.3rem;
+    padding-left: 20px;
+}
+
+.brand-logo {
+    font-size: 1.6rem;
+    margin-right: 8px;
+}
+
+.navbar-custom .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1rem;
+    padding-left: 20px !important;
+}
+
+.navbar-custom .nav-link:hover {
+    color: white !important;
+}
+
+.navbar-custom .dropdown-toggle {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.navbar-custom .dropdown-toggle:hover {
+    color: white !important;
+}
+
+.navbar-dropdown .dropdown-menu {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    min-width: 160px;
+}
+
+.navbar-dropdown .dropdown-item {
+    color: #374151;
+    padding: 10px 16px;
+}
+
+.navbar-dropdown .dropdown-item:hover {
+    background: #f3f4f6;
+    color: #1f2937;
+}
+
+.logout-item {
+    color: #dc2626 !important;
+    font-weight: 600;
+}
+
+.logout-item:hover {
+    background: #fee2e2 !important;
+    color: #b91c1c !important;
+}
